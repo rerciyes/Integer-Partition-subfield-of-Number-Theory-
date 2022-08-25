@@ -1,0 +1,26 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+for n:4 thru 30 do(s:integer_partitions(n),
+number:0,
+maincounter_1:0,
+    
+  for i in s do(counter:0,
+        for j:1 thru length(i)-1 do(if mod(i[j],2)=1 and mod(i[length(i)],2)=1 then (if i[j]#i[j+1] then counter:counter+1 ),
+        if counter=length(i)-1 then maincounter_1:maincounter_1+1)),
+    if mod(n,2)=1 then maincounter_1:maincounter_1+1,
+    
+  for i in s do (if length(i)=i[1] then( control:0,
+        for j:2 thru length(i) do(a:[],
+            for k:j thru length(i) do(i[k]:i[k]-1,
+            if i[k]>0 then push(i[k],a)),
+         if i[j]>=0 then ( if i[j]#length(a) then control:control+1)),
+        if control=0 then number:number+1)),
+        
+   if number=maincounter_1 then print("correct for",n ) );
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
