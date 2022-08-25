@@ -1,0 +1,154 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+/*The number of partitions of a non-negative integer into parts congruent to ±1 or ±3 (mod 9) */
+b:[];
+assume(a,list);
+f:[];
+for n:1 thru 15 do(
+    s:integer_partitions(n),
+    maincounter:0,
+    for i in s do(
+        counter:0,
+    for j in i do(
+        if mod(j,9)=1 or mod(j,9)=8 or mod(j,9)=3 or mod(j,9)=6 then counter:counter+1 ),
+    if counter = length(i) then maincounter:maincounter+1),
+b:append(b,[maincounter])
+);
+b;
+
+for n:1 thru length(b) do(
+    y_1:0,
+    y_2:0,
+for d:1 thru n-1 do(if mod(n,d)=0 then y_1:y_1+d*(a[d])
+    ),
+    
+  
+for j:1 thru n-1 do(inner:0,
+    for d:1 thru j do(if mod(j,d)=0 then inner:inner+d*a[d]),
+    y_2:y_2+ inner*b[n-j]
+    ),
+
+a[n]:b[n]-((y_1+y_2)/n),
+f:append(f,[a[n]])    
+);
+
+f;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*The number of partitions of a non-negative integer into parts congruent to ±1 or ±3 (mod 9) */
+b:[];
+assume(a,list);
+f:[];
+for n:1 thru 15 do(
+    s:integer_partitions(n),
+    maincounter:0,
+    for i in s do(
+        counter:0,
+    for j in i do(
+        if mod(j,4)=1 or mod(j,4)=8 or mod(j,4)=3 or mod(j,4)=6 then counter:counter+1 ),
+    if counter = length(i) then maincounter:maincounter+1),
+b:append(b,[maincounter])
+);
+b;
+
+for n:1 thru length(b) do(
+    y_1:0,
+    y_2:0,
+for d:1 thru n-1 do(if mod(n,d)=0 then y_1:y_1+d*(a[d])
+    ),
+    
+  
+for j:1 thru n-1 do(inner:0,
+    for d:1 thru j do(if mod(j,d)=0 then inner:inner+d*a[d]),
+    y_2:y_2+ inner*b[n-j]
+    ),
+
+a[n]:b[n]-((y_1+y_2)/n),
+f:append(f,[a[n]])    
+);
+
+f;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+b:[];
+assume(a,list);
+f:[];
+for n:1 thru 15 do(
+    s:integer_partitions(n),
+    maincounter:0,
+    for i in s do(
+        counter:0,
+    for j in i do(
+        if mod(j,12)=1 or mod(j,12)=3 or mod(j,12)=4 or mod(j,12)=6 or mod(j,12)=7 or mod(j,12)=10 or mod(j,12)=11  then counter:counter+1 ),
+    if counter = length(i) then maincounter:maincounter+1),
+b:append(b,[maincounter])
+);
+b;
+
+for n:1 thru length(b) do(
+    y_1:0,
+    y_2:0,
+for d:1 thru n-1 do(if mod(n,d)=0 then y_1:y_1+d*(a[d])
+    ),
+    
+  
+for j:1 thru n-1 do(inner:0,
+    for d:1 thru j do(if mod(j,d)=0 then inner:inner+d*a[d]),
+    y_2:y_2+ inner*b[n-j]
+    ),
+
+a[n]:b[n]-((y_1+y_2)/n),
+f:append(f,[a[n]])    
+);
+
+f;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*the first part give # of partitions with condition no 1-part and distinct = p(n|no 1-part, distinct part),
+ı found until n=15 thus ı obtained the list b which represent a_n in Proposition1 */
+
+b:[];
+for k:1 thru 15 do(
+s:integer_partitions(k),
+maincounter:0,
+for i in s do(
+    controller:true,
+    for m:1 thru length(i)-1 do(if i[m]=i[m+1] then controller:false),
+    for j in i do(if j=1 then controller:false),    
+    if controller=true then maincounter:maincounter+1),
+b:append(b,[maincounter])
+);
+b;
+/*then, ı obtain b_n from a_n by algorithm below we wrote, so f represent b_n*/
+assume(a,list);
+f:[];
+for n:1 thru length(b) do(
+    y_1:0,
+    y_2:0,
+for d:1 thru n-1 do(if mod(n,d)=0 then y_1:y_1+d*(a[d])
+    ),
+    
+  
+for j:1 thru n-1 do(inner:0,
+    for d:1 thru j do(if mod(j,d)=0 then inner:inner+d*a[d]),
+    y_2:y_2+ inner*b[n-j]
+    ),
+
+a[n]:b[n]-((y_1+y_2)/n),
+f:append(f,[a[n]])    
+);
+
+f;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
