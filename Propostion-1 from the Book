@@ -1,0 +1,52 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+/*p(n| d-distinct when d≥2, no square number)*/
+b:[];
+assume(a,list);
+f:[];
+for n:1 thru 15 do(
+s:integer_partitions(n),
+counter:0,
+for i in s do(
+    controller:true,
+    for k:1 thru length(i)-1 do(if i[k]=i[k+1] or i[k]=i[k+1]+1 then controller:false),
+    
+    for j in i do(if integerp(sqrt(j))= true then controller:false),
+    
+    if controller=true then counter:counter+1),
+ 
+b:append(b,[counter])  
+    
+);
+
+b;
+
+for n:1 thru length(b) do(
+    y_1:0,
+    y_2:0,
+for d:1 thru n-1 do(if mod(n,d)=0 then y_1:y_1+d*(a[d])
+    ),
+    
+  
+for j:1 thru n-1 do(inner:0,
+    for d:1 thru j do(if mod(j,d)=0 then inner:inner+d*a[d]),
+    y_2:y_2+ inner*b[n-j]
+    ),
+
+a[n]:b[n]-((y_1+y_2)/n),
+f:append(f,[a[n]])    
+);
+
+f;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+	
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
