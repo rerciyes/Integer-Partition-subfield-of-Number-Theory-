@@ -1,0 +1,54 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+/* p(n| parts ≣ 1 or 4 mod(5))= p(n| 2- distinct parts) */
+n:10;
+s:integer_partitions(n)$
+maincounter_1:0;
+maincounter_2:0;
+
+/*p(n| parts ≣ 1 or 4 mod(5))*/
+for i in s do(counter:0,
+for j in i do(if mod(j,5)=1 or mod(j,5)=4 then counter:counter+1,
+    if counter=length(i) then maincounter_1:maincounter_1+1));
+
+/*p(n| 2- distinct parts)*/
+for i in s do(counter:0,
+    if length(i)=1 then maincounter_2:maincounter_2+1,
+    for j:1 thru length(i)-1 do(if i[j]-i[j+1]>=2 then counter:counter+1,
+    if counter=length(i)-1 then maincounter_2:maincounter_2+1));
+/*if number of parts is equal to one, also it is evaluated as 2-distinct, that's why ı put if control before control of 2-distinct parts*/
+maincounter_2;
+maincounter_1;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*more generalized, ın Alder's conjecture; p(n| parts≣+-1 mod(d+1)) =< p(n|d-distinct parts)
+that's why ı calculated difference of these partitions below */
+d:20;
+n:10;
+maincounter_3:0;
+maincounter_4:0;
+s:integer_partitions(n)$
+
+/*p(n|d-distinct parts)*/
+for i in s do(counter:0,
+for j in i do(if mod(j,d+3)=1 or mod(j,d+3)=d+2 then counter:counter+1,
+    if counter=length(i) then maincounter_3:maincounter_3+1));
+maincounter_3;
+
+/*p(n| parts≣+-1 mod(d+1))*/
+for i in s do(counter:0,
+    if length(i)=1 then maincounter_4:maincounter_4+1,
+    for j:1 thru length(i)-1 do(if i[j]-i[j+1]>=d then counter:counter+1,
+    if counter=length(i)-1 then maincounter_4:maincounter_4+1));
+
+difference: maincounter_4-maincounter_3;
+difference;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
