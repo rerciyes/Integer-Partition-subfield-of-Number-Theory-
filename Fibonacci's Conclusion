@@ -1,0 +1,40 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+n:20;
+s: integer_partitions(n)$
+f: integer_partitions(n-2)$
+maincounter:0;
+counterforno_1_part_2:0;
+
+for i in f do(counter:0,n:[],
+    for j in i do(if j=1 
+        then 
+        counter:counter+1,
+        if j#1 then push(j,n)), if lmin(n)#1 then if lmin(n) < 2+counter then maincounter:maincounter+1 );
+maincounter;
+
+for i in s do(counter_3:0, 
+    for j in i do( if j#1 then counter_3:counter_3+1,
+    if counter_3= length(i) then counterforno_1_part_2:counterforno_1_part_2+1 ));
+counterforno_1_part_2;
+
+if cardinality(f)= maincounter + counterforno_1_part_2 then print("identity is correct");
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/* p(n-2)= p(n| no 1-part) + p(n-2| smallest non 1-part< 2+ # 1-parts)
+1st for loop represents "p(n-2| smallest non 1-part< 2+ # 1-parts)"
+Firstly ı calculated #1-parts to use for inequality(=smallest non 1-part< 2+ # 1-parts)
+after that ı make a list for non 1-parts and obtain min part
+the last, ı can obtain #of this partitions by if controls 
+
+2nd for loop represent p(n| no 1-part)
+actually, ı used previous loop approach to find no-1 part. 
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
