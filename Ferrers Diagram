@@ -1,0 +1,36 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+n:7$
+s:integer_partitions(n)$
+greatest_part:3$
+counterfors_1:0$
+counterfors_2:0$
+list_1:[]$
+for i in s do (counter_1:0,
+    for j in i do (if (j <= greatest_part) then counter_1:counter_1+1,
+    if (length(i)=counter_1) then push(i,list_1) ) );
+for i in list_1 do( counter_2:0,
+    for j in i do (if j < greatest_part then counter_2:counter_2+1,
+    if (length(i)=counter_2) then counterfors_2:counterfors_2+1  ) ); 
+print(length(list_1)-counterfors_2);
+
+f:integer_partitions(n-greatest_part)$
+counterforf:0$
+for i in f do( counter_3:0,
+    for j in i do (if (j <= greatest_part) then counter_3:counter_3+1,
+    if (length(i)=counter_3) then counterforf:counterforf+1  ) );
+print(counterforf);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/* p(n|greatest part is r)= p(n-r|all parts ≤ r) (chapter 3, p.15)
+/* Actually, It is the same approach with conjugate partitions, ı explained reason of using of list counters in conjugate partitions file.
+/* I try to obtain same number which represent p(n|greatest part is r) and p(n-r|all parts ≤ r) separately.
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
