@@ -1,0 +1,30 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+/* Subbarao identity (Chapter-5,exercise-75) said that number of partitions of n in which each part appears exactly 2,3 or 5 times(is represented in first for loop)
+equals
+the number of partitions of n into parts congruent to +-2,+-3 or 6 mod(12)(is represented in second for loop)*/
+
+for n:4 thru 30 do(
+s:integer_partitions(n),
+f:0,
+b:0,    
+
+for i in s do(counter:0,
+for k:1 thru length(i)do(a:0,
+    for j in i do(if i[k]=j then a:a+1),
+    if a=2 or a=3 or a=5 then counter:counter+1 ),
+if counter=length(i) then f:f+1),
+
+for i in s do(counter:0,
+for j in i do(if mod(j,12)=2 or mod(j,12)=3 or mod(j,12)=6 or mod(j,12)=10 or mod(j,12)=9 then counter:counter+1),
+if counter=length(i) then b:b+1),
+    
+if b=f then print("identity is correct for", n)
+);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
