@@ -1,0 +1,30 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 19.05.7 ] */
+/* [wxMaxima: input   start ] */
+s:integer_partitions(5)$
+distinct_parts:[]$
+odd_parts:[]$
+for i in s do (counter_1:0,
+    for j:1 thru length(i)-1 do(if i[j]>i[j+1] or i[j]<i[j+1] then counter_1:counter_1+1,
+    if (counter_1= length(i)-1) then push(i,distinct_parts)) );
+
+for k in s do( if (length(k)=1) then push(k,distinct_parts));
+
+for i in s do (counter:0,
+    for j in i do(if oddp(j) then counter:counter+1,
+    if (counter=length(i)) then push(i,odd_parts)) );
+odd_parts;
+distinct_parts;
+
+if (length(odd_parts)=length(distinct_parts)) then print("Euler Identity");
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 19.05.7"$
